@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.png">
+    <title>Sundreamglass - Riscaldamenti a Infrarossi</title>
+    
+    <!-- For production use the corresponding *.min.css versions. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --my-navbar-padding-y: 0.5rem;          /* default: 0.5rem */
+            --my-brand-padding-y: 0.3125rem;        /* default: 0.3125rem */
+            --my-navbar-toggler-padding-y: 0.25rem; /* default: 0.25rem */
+            --my-brand-img-height: 60px;
+            --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y));
+
+            /* TODO: use bootstrap colors */
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+        }
+        @media (width < 576px) {
+            a.navbar-brand {
+                /* Make the toggle wrap on xs breakpoint */
+                width: 100%;
+            }
+            :root {
+                /* New calculation that includes the toggle. Note that for really 
+                   small devices it's not precise because the image scales, but 
+                   it's not a problem if we have a bit more spacing. */
+                --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y) + 2 * var(--my-navbar-toggler-padding-y) + 1.5em);
+            }
+        }
+        .navbar {
+            /* Override paddings */
+            --bs-navbar-padding-y: var(--my-navbar-padding-y);
+            --bs-navbar-brand-padding-y: var(--my-brand-padding-y);
+
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-toggler {
+            /* Override padding */
+            --bs-navbar-toggler-padding-y: var(--my-navbar-toggler-padding-y);
+        }
+        a.navbar-brand img {
+            max-height: var(--my-brand-img-height);
+        }
+        html {
+            /* Prevent anchor links from scrolling behind the fixed navbar */
+            scroll-padding-top: var(--calc-navbar-height);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #F39200 0%, #ffd700 100%);
+            
+            /* We need some spacing because of the fixed navbar */
+            padding-top: calc(50px + var(--calc-navbar-height));
+
+            padding-bottom: 100px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        .product-card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .benefit-box {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .benefit-box:hover {
+            transform: translateY(-3px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .tech-section {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+        }
+        
+        .contact-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        /* TODO: use bootstrap button classes */
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        /* Breakpoint indicator (remove that for production) */
+        body::before {
+            content: "xs";
+            color: red;
+            font-size: 2rem;
+            font-weight: bold;
+            position: fixed;
+            top: 14px;
+            right: 17px;
+            z-index: 1100;
+        }
+        @media (min-width: 576px) {
+            body::before {
+                content: "sm";
+            }
+        }
+        @media (min-width: 768px) {
+            body::before {
+                content: "md";
+            }
+        }
+        @media (min-width: 992px) {
+            body::before {
+                content: "lg";
+            }
+        }
+        @media (min-width: 1200px) {
+            body::before {
+                content: "xl";
+            }
+        }
+        @media (min-width: 1400px) {
+            body::before {
+                content: "xxl";
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+        <div class="container-md">
+            <a class="navbar-brand" href="#home">
+                <img src="img/logo-sundreamglass.png" class="img-fluid" alt="logo">
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#my-nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="my-nav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#technology">Tecnologia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Prodotti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Vantaggi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contatto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-white">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Il Piacere di un Caldo Ambiente</h1>
+                    <p class="lead mb-4">Sundreamglass è un irradiatore di calore a raggi infrarossi che offre un notevole risparmio energetico e una piacevole sensazione di benessere.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#products" class="btn btn-light btn-lg">Scopri i Prodotti</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Contattaci</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="bi bi-sun-fill" style="font-size: 12rem; opacity: 0.8;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="tech-section">
+        <div class="container">
+            <h2 class="text-center section-title">Tecnologia e Funzionamento</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Cos'è Sundreamglass?</h4>
+                            <p class="card-text">Sundreamglass è un irradiatore di calore a raggi infrarossi, costituito da un sistema ad alto potere calorifero che consente un notevole risparmio energetico. La lastra di vetro emana calore e trasmette i benefici dei raggi infrarossi (come i raggi solari).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Come Funziona</h4>
+                            <p class="card-text">Il calore infrarosso è determinante per il clima interno percepito. Questo spiega la piacevole sensazione di calore e benessere che viene emanata dai riscaldamenti sundreamglass, simile al calore naturale del sole.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">I Nostri Prodotti</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-square" style="font-size: 3rem; color: #95a5a6;"></i>
+                            <h5 class="card-title mt-3">Bianco</h5>
+                            <p class="card-text">Design minimalista ed elegante, perfetto per ogni ambiente.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-square-fill" style="font-size: 3rem; color: #2c3e50;"></i>
+                            <h5 class="card-title mt-3">Nero</h5>
+                            <p class="card-text">Stile moderno e sofisticato per un design di impatto.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-palette" style="font-size: 3rem; color: #e74c3c;"></i>
+                            <h5 class="card-title mt-3">Tinta Unità</h5>
+                            <p class="card-text">Colori personalizzati per integrarsi perfettamente con il tuo arredamento.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-image" style="font-size: 3rem; color: #3498db;"></i>
+                            <h5 class="card-title mt-3">Immagine Personalizzata</h5>
+                            <p class="card-text">Le tue immagini preferite stampate sul pannello riscaldante.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-border-style" style="font-size: 3rem; color: #16a085;"></i>
+                            <h5 class="card-title mt-3">Specchio</h5>
+                            <p class="card-text">Funzionale e termico, perfetto per bagni e spazi privati.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-grid-3x3" style="font-size: 3rem; color: #8e44ad;"></i>
+                            <h5 class="card-title mt-3">Laminam</h5>
+                            <p class="card-text">Materiali premium per un lusso senza compromessi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-rulers" style="font-size: 3rem; color: #f39c12;"></i>
+                            <h5 class="card-title mt-3">Le Misure</h5>
+                            <p class="card-text">Dimensioni personalizzate per ogni esigenza.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-info-circle" style="font-size: 3rem; color: #27ae60;"></i>
+                            <h5 class="card-title mt-3">Il Prodotto</h5>
+                            <p class="card-text">Scopri tutte le caratteristiche tecniche.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Vantaggi</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-wind benefit-icon"></i>
+                        <h5>Nessuna Corrente d'Aria</h5>
+                        <p>Il calore viene distribuito in modo uniforme senza creare fastidiose correnti d'aria.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-shield-check benefit-icon"></i>
+                        <p>Igienico e Sicuro</p>
+                        <p>Non solleva polvere, previene la formazione di muffe e non rilascia emissioni nocive.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-volume-mute benefit-icon"></i>
+                        <p>Silenzioso</p>
+                        <p>Funziona in completo silenzio, garantendo massima tranquillità negli ambienti.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-droplet benefit-icon"></i>
+                        <p>Aria Non Secca</p>
+                        <p>Mantiene il giusto livello di umidità nell'ambiente, evitando l'aria secca.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-lightning-charge benefit-icon"></i>
+                        <p>Risparmio Energetico</p>
+                        <p>Consuma notevolmente meno rispetto ai tradizionali sistemi elettrici.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-geo-alt benefit-icon"></i>
+                        <p>Calore Diretto</p>
+                        <p>Genera il calore direttamente nel locale senza disperdere energia in tubature.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-award benefit-icon"></i>
+                        <p>Qualità Svizzera</p>
+                        <p>Prodotto al 100% in Svizzera con materiali di prima qualità.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-box">
+                        <i class="bi bi-leaf benefit-icon"></i>
+                        <p>Eco-Friendly</p>
+                        <p>Nessuna emissione di CO2 o fuliggine, rispettoso dell'ambiente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Contattaci</h2>
+                    <p class="mb-4">Per informazioni sui nostri prodotti o per una consulenza personalizzata, non esitare a contattarci.</p>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>info@sundreamglass.ch</span>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Via Alfredo Pioda 42, 6600 Locarno, Svizzera</span>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+41 91 123 45 67</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Richiedi Informazioni</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Messaggio</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Invia Messaggio</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-md-start text-white">
+        <div class="container g-5 py-5">
+            <div class="row g-5">
+                <div class="col-md-4">
+                    <p class="lead mb-0">
+                        Copyright &copy; <script>document.write(new Date().getFullYear());</script> sundreamglass<br>
+                        <i class="bi bi-sun-fill"></i> Riscaldamenti a infrarossi<br>
+                        Prodotti al 100% in Svizzera<br>
+                        <a href="https://www.sundreamglass.ch" class="link-warning" target="_blank">www.sundreamglass.ch</a>
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <address class="mx-auto mb-0" style="width: fit-content;">
+                        <p class="lead">
+                            Sundreamglass<br>
+                            Via Alfredo Pioda 42<br>
+                            6600 Locarno
+                        </p>
+                        <p class="lead mb-0">
+                            +41 (0) 91 780 02 02<br>
+                            <a href="mailto:info@sundreamglass.ch" class="link-warning">info@sundreamglass.ch</a>
+                        </p>
+                    </address>
+                </div>
+                <div class="col-md-3 col-lg-4 d-flex justify-content-center justify-content-md-end align-items-end">
+                    <a href="#" class="link-light">
+                        <i class="bi-arrow-up-circle fs-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Always place this before the body closing tag.
+         For production use the corresponding *.min.js version. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+    <script>
+        /* When we click a navbar link in an open collapse navbar, the link 
+           is followed, but the navbar is not hidden. For single page sites, 
+           it's usually desirable to hide the navbar after a link click: */
+        const navLinks = document.querySelectorAll('a.navbar-brand, .nav-item:not(.dropdown) a.nav-link, .nav-item.dropdown a.dropdown-item');
+        const menuToggle = document.getElementById('my-nav');
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+        navLinks.forEach((l) => {
+            l.addEventListener('click', () => {
+                bsCollapse.hide();
+            });
+        });
+
+        // Form submission handler
+        // TODO: remove that, as we want a map instead of a form
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Grazie per averci contattato! Ti risponderemo al più presto.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
