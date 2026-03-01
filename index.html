@@ -20,13 +20,13 @@
             --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y));
 
             /* Custom bootstrap colors */
+            --bs-primary: #3498DB;
+            --bs-primary-rgb: 52, 152, 219;
             --bs-warning: #F39200;       /* sundreamglass orange */
             --bs-warning-rgb: 243, 146, 0; /* sundreamglass orange */
 
             /* Our custom colors */
             --section-title-color: #2c3e50;
-            --section-underline-color: #3498db;
-            --benefit-icon-color: #3498db;
         }
         @media (width < 576px) {
             a.navbar-brand {
@@ -90,7 +90,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: var(--section-underline-color);
+            background: var(--bs-primary);
         }
         
         .product-card {
@@ -118,7 +118,7 @@
         }
         .benefit-icon {
             font-size: 3rem;
-            color: var(--benefit-icon-color);
+            color: var(--bs-primary);
             margin-bottom: 20px;
         }
 
@@ -222,9 +222,9 @@
             <h2 class="text-center section-title">Tecnologia e Funzionamento</h2>
             <div class="row row-gap-4">
                 <div class="col-lg-6">
-                    <h2 class="display-6"><i class="bi bi-patch-question" style="color: var(--benefit-icon-color);"></i> Cos'è sundreamglass</h2>
+                    <h2 class="display-6"><i class="bi bi-patch-question text-primary"></i> Cos'è sundreamglass</h2>
                     <p class="lh-lg"><em>Sundreamglass</em> è un irradiatore di calore a raggi infrarossi, costituito da un sistema ad alto potere calorifero che consente un notevole risparmio energetico. La lastra di vetro emana calore e trasmette i benefici dei raggi infrarossi (simile al calore naturale del sole).</p>
-                    <h2 class="display-6"><i class="bi bi-rocket-takeoff" style="color: var(--benefit-icon-color);"></i> Come funziona</h2>
+                    <h2 class="display-6"><i class="bi bi-rocket-takeoff text-primary"></i> Come funziona</h2>
                     <p class="lh-lg">La trasmissione immediata dell’energia permette la regolazione diretta e l’adeguamento alle condizioni mutevoli dell’ambiente. Il sistema <em>sundreamglass</em>, riscaldando gli oggetti nel locale, non genera correnti d’aria. L’aria rimane omogeneamente temperata.</p>
                 </div>
                 <div class="col-lg-6">
@@ -448,9 +448,9 @@
                 <div class="col-lg">
                     <h2 class="display-6"><i class="bi bi-rulers text-warning"></i> Grande flessibilità</h2>
                     <p class="lh-lg"><em>Sundreamglass</em> offre dieci misure diverse appositamente studiate per ogni tipo di esigenza. È possibile combinare a piacimento pannelli di misure e superfici diverse.</p>
-                    <h2 class="display-6"><i class="bi bi-infinity" style="color: var(--benefit-icon-color);"></i> Abbinamento migliore</h2>
+                    <h2 class="display-6"><i class="bi bi-infinity text-primary"></i> Abbinamento migliore</h2>
                     <p class="lh-lg">Tutte i tipi di superficie, dal bianco sino all'immagine personalizzata, sono sempre disponibili nelle seguenti misure.</p>
-                    <h2 class="display-6"><i class="bi bi-info-circle" style="color: var(--benefit-icon-color);"></i> Consiglio</h2>
+                    <h2 class="display-6"><i class="bi bi-info-circle text-primary"></i> Consiglio</h2>
                     <p class="lh-lg">È possibile installare i pannelli <em>sundreamglass</em> sia verticalmente che orizzontalmente.</p>
                 </div>
                 <div class="col-lg">
