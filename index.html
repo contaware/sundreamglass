@@ -367,8 +367,12 @@
         </div>
     </section>
 
-    <!-- Carousel Section -->
-    <div id="photo" class="bg-black carousel slide">
+    <!-- Carousel Section 
+         Warning: leave the two data-bs-* attributes in place with a 
+                  high data-bs-interval (but not more than a maximum 
+                  signed 32-bit integer) so that touch swipe works 
+                  without the need to first tap on next/prev buttons. -->
+    <div id="photo" class="bg-black carousel slide" data-bs-ride="carousel" data-bs-interval="2000000000">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="img/carousel/sundreamglass-pannello-doccia-con-porta-salviette.jpg" alt="sundreamglass-panel" class="viewport-fit">
