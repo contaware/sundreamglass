@@ -28,15 +28,19 @@
             /* Our custom colors */
             --section-title-color: #2c3e50;
         }
-        @media (width < 576px) {
+        @media (width < 576px) { /* for xs displays */
             a.navbar-brand {
-                /* Make the toggle wrap for xs displays */
+                /* Make the toggle wrap */
                 width: 100%;
+
+                /* As toggle wraps, we can remove the right margin */
+                --bs-navbar-brand-margin-end: 0;
             }
             :root {
-                /* New calculation that includes the toggle. Note that for really 
-                   small devices it's not precise because the image scales, but 
-                   it's not a problem if we have a bit more spacing. */
+                /* New calculation that includes the toggle.
+                   Set the height so that the brand img fits 
+                   horizontally for really small devices. */
+                --my-brand-img-height: 46px;
                 --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y) + 2 * var(--my-navbar-toggler-padding-y) + 1.5em);
             }
         }
