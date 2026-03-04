@@ -90,6 +90,12 @@
             --bs-btn-focus-shadow-rgb: 255, 193, 7;
         }
 
+        /* Dropdown */
+        .dropdown-menu {
+            --bs-dropdown-link-active-color: #fff;
+            --bs-dropdown-link-active-bg: var(--bs-primary);
+        }
+
         /* Carousel */
         img.viewport-fit {
             width: 100%;
@@ -220,6 +226,13 @@
                         <a class="nav-link" href="#sizes">Masse</a>
                     </li>
                 </ul>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">DE</button>
+                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li><a class="dropdown-item" href="index.html">Italiano</a></li>
+                        <li><a class="dropdown-item active" href="index-de.html">Deutsch</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
