@@ -37,10 +37,7 @@
                 --bs-navbar-brand-margin-end: 0;
             }
             :root {
-                /* New calculation that includes the toggle.
-                   Set the height so that the brand img fits 
-                   horizontally for really small devices. */
-                --my-brand-img-height: 46px;
+                /* New calculation that includes the toggle */
                 --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y) + 2 * var(--my-navbar-toggler-padding-y) + 1.5em);
             }
         }
@@ -56,7 +53,9 @@
             --bs-navbar-toggler-padding-y: var(--my-navbar-toggler-padding-y);
         }
         a.navbar-brand img {
-            max-height: var(--my-brand-img-height);
+            max-width: 100%;
+            height: var(--my-brand-img-height);
+            object-fit: contain;
         }
         html {
             /* Prevent anchor links from scrolling behind the fixed navbar */
@@ -200,7 +199,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
         <div class="container-md">
             <a class="navbar-brand" href="#">
-                <img src="img/logo-sundreamglass.png" class="img-fluid" alt="logo">
+                <img src="img/logo-sundreamglass.png" alt="logo">
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#my-nav">
                 <span class="navbar-toggler-icon"></span>
