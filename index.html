@@ -14,11 +14,11 @@
         :root {
             /* Navbar spacing and height */
             --my-navbar-padding-y: 0.5rem;          /* default: 0.5rem */
-            --my-brand-padding-y: 0.3125rem;        /* default: 0.3125rem */
+            --my-navbar-brand-padding-y: 0.3125rem; /* default: 0.3125rem */
             --my-navbar-toggler-padding-y: 0.25rem; /* default: 0.25rem */
             --my-navbar-toggler-font-size: 1.25rem; /* default: 1.25rem */
             --my-brand-img-height: 60px;
-            --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y));
+            --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-navbar-brand-padding-y) + 2 * var(--my-navbar-padding-y));
 
             /* Custom bootstrap colors */
             --bs-primary: #3498DB;
@@ -39,16 +39,16 @@
             }
             :root {
                 /* New calculation that includes the toggle */
-                --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-brand-padding-y) + 2 * var(--my-navbar-padding-y) + 2 * var(--my-navbar-toggler-padding-y) + 1.5 * var(--my-navbar-toggler-font-size));
+                --calc-navbar-height: calc(var(--my-brand-img-height) + 2 * var(--my-navbar-brand-padding-y) + 2 * var(--my-navbar-padding-y) + 2 * var(--my-navbar-toggler-padding-y) + 1.5 * var(--my-navbar-toggler-font-size));
             }
         }
         .navbar {
             /* Override */
             --bs-navbar-padding-y: var(--my-navbar-padding-y);
-            --bs-navbar-brand-padding-y: var(--my-brand-padding-y);
+            --bs-navbar-brand-padding-y: var(--my-navbar-brand-padding-y);
             --bs-navbar-toggler-padding-y: var(--my-navbar-toggler-padding-y);
             --bs-navbar-toggler-font-size: var(--my-navbar-toggler-font-size);
-            
+
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         a.navbar-brand img {
