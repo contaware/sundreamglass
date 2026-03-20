@@ -627,7 +627,7 @@
                 l.href = url + location.hash;
             });
         }
-        updateLangLinks();
+        updateLangLinks(); // needed when loading page with fragment
         window.addEventListener('hashchange', () => {
             updateLangLinks();
         });
